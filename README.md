@@ -28,7 +28,7 @@ come from the first two rows.
 | **Nerd Font** in the terminal (e.g. a *Nerd Font* build of JetBrains Mono, Hack, Fira Code) | tmux2k icons: session, ram, cpu, powerline tab ends | icons show as empty boxes or blanks |
 | **Linux** with `/proc`, `bash`, `awk` | tmux2k `cpu` and `ram` plugins read `/proc` | on macOS/BSD the cpu/ram blocks come out empty or broken |
 | Terminal with a **dark background** (or transparency) | `@tmux2k-bg-main default` uses the terminal colour as the bar background | on a light terminal the bar inverts: light bar, dark tabs |
-| `btop` *(optional)* | clicking cpu/ram opens it in a popup | the click does nothing |
+| `btop` and/or `htop` *(optional)* | clicking cpu/ram opens a monitor in a popup (`tmux.conf.d/sysmon.sh`: btop when the popup has ≥ 80 columns, htop otherwise, `top` as last resort); `q` closes it | falls back to `top` |
 | `git` with submodule support | tmux2k and tmux-menus are pinned submodules | `install.sh` stops with "submodule … is empty" |
 
 If tmux ≥ 3.7 is not in `/usr/bin`, `tmux.conf` pins the server's `PATH` to `~/tools/bin:~/.local/bin:…`
@@ -54,6 +54,7 @@ printf '\uf017 \ue0b0 \uf2db\n'           # a clock, a powerline arrow and a chi
 - **Bottom**: tabs on the pane's bottom border. Click switches, middle button closes, right button opens a menu,
   double click on empty space creates a window. Only windows 1–9 are clickable (tmux's limit of 10 controls).
 - Right click on a pane: new window, split, zoom, even out, paste, close.
+- Click on ram/cpu: system monitor in a popup, `q` closes it.
 - Transparent bar background (`@tmux2k-bg-main default`).
 
 ## Keys
