@@ -48,6 +48,13 @@ Se o tmux ≥ 3.7 não está no `/usr/bin`, o `tmux.conf` fixa o `PATH` do servi
 | `C-b r` | recarregar config |
 | `C-b \` | tmux-menus |
 
+## Sessões que sobrevivem ao reboot (opcional)
+
+Onde [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) e
+[tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) estiverem clonados em `~/.tmux/plugins/`,
+o `tmux.conf` os carrega: salva a cada 15 min e restaura ao subir o servidor (`C-b C-s` / `C-b C-r` à mão).
+Painel com `claude` volta pelo `~/.tmux/claude-restore`, que é da máquina, não do repo. Sem os clones, nada carrega.
+
 ## Atualizar um plugin
 
 ```bash
