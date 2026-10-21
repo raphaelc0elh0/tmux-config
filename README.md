@@ -45,7 +45,7 @@ uname -s                                 # Linux; cpu/ram need /proc
 tmux show -g status-position             # top  = 3.7 layout, bottom = fallback
 tmux show -gv 'status-format[0]' | head -c 120; echo   # must mention @session-block and "☰ Menu"
 ls -la ~/.tmux/plugins/                  # tmux2k and tmux-menus → symlinks into the clone
-echo "\uf017 \ue0b0 \uf2db"              # a clock, a powerline arrow and a chip: boxes = no Nerd Font
+printf '\uf017 \ue0b0 \uf2db\n'           # a clock, a powerline arrow and a chip: boxes = no Nerd Font
 ```
 
 ## Layout (tmux ≥ 3.7)
