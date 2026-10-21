@@ -19,14 +19,34 @@ server to catch syntax errors. The clone can live anywhere; the symlinks follow 
 
 ## Requirements
 
-| What | Why |
-|---|---|
-| tmux **≥ 3.7** | real buttons on the bar (`range=control\|N`, clicks on the top border). With 3.4 the config still loads but falls into the `%else` of `mouse.conf`: an "Actions" strip on the bottom border that opens a menu |
-| Nerd Font in the terminal | tmux2k icons |
-| `bash`, `awk`, `/proc` | tmux2k `cpu` and `ram` plugins; `btop` optional (clicking cpu/ram opens it) |
+What the setup needs and what you get without it. Most "it looks different on this machine" reports
+come from the first two rows.
+
+| What | Why | Without it |
+|---|---|---|
+| tmux **≥ 3.7** | real buttons on the bar (`range=control\|N`, clicks on the top border) | the config still loads but falls into the `%else` of `mouse.conf`: status bar at the **bottom**, two lines, no buttons on top, an "Actions" strip on the pane's bottom border that opens a menu |
+| **Nerd Font** in the terminal (e.g. a *Nerd Font* build of JetBrains Mono, Hack, Fira Code) | tmux2k icons: session, ram, cpu, powerline tab ends | icons show as empty boxes or blanks |
+| **Linux** with `/proc`, `bash`, `awk` | tmux2k `cpu` and `ram` plugins read `/proc` | on macOS/BSD the cpu/ram blocks come out empty or broken |
+| Terminal with a **dark background** (or transparency) | `@tmux2k-bg-main default` uses the terminal colour as the bar background | on a light terminal the bar inverts: light bar, dark tabs |
+| `btop` and/or `htop` *(optional)* | clicking cpu/ram opens a monitor in a popup (`tmux.conf.d/sysmon.sh`: btop when the popup has ≥ 80 columns, htop otherwise, `top` as last resort); `q` closes it | falls back to `top` |
+| `git` with submodule support | tmux2k and tmux-menus are pinned submodules | `install.sh` stops with "submodule … is empty" |
 
 If tmux ≥ 3.7 is not in `/usr/bin`, `tmux.conf` pins the server's `PATH` to `~/tools/bin:~/.local/bin:…`
 (`%if` by version) so the plugins' `run-shell` calls talk to the right server — a detail that cost dearly under ttyd.
+
+A tmux server that was already running when you ran `install.sh` keeps the old config until you reload it
+(`C-b r` or `tmux source-file ~/.tmux.conf`) or kill it (`tmux kill-server`).
+
+### Check
+
+```bash
+tmux -V                                  # want 3.7 or newer; 3.4 = fallback layout
+uname -s                                 # Linux; cpu/ram need /proc
+tmux show -g status-position             # top  = 3.7 layout, bottom = fallback
+tmux show -gv 'status-format[0]' | head -c 120; echo   # must mention @session-block and "☰ Menu"
+ls -la ~/.tmux/plugins/                  # tmux2k and tmux-menus → symlinks into the clone
+printf '\uf017 \ue0b0 \uf2db\n'           # a clock, a powerline arrow and a chip: boxes = no Nerd Font
+```
 
 ## Layout (tmux ≥ 3.7)
 
@@ -34,6 +54,7 @@ If tmux ≥ 3.7 is not in `/usr/bin`, `tmux.conf` pins the server's `PATH` to `~
 - **Bottom**: tabs on the pane's bottom border. Click switches, middle button closes, right button opens a menu,
   double click on empty space creates a window. Only windows 1–9 are clickable (tmux's limit of 10 controls).
 - Right click on a pane: new window, split, zoom, even out, paste, close.
+- Click on ram/cpu: system monitor in a popup, `q` closes it.
 - Transparent bar background (`@tmux2k-bg-main default`).
 
 ## Keys
