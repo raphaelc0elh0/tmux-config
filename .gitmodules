@@ -1,0 +1,6 @@
+[submodule "plugins/tmux2k"]
+	path = plugins/tmux2k
+	url = https://github.com/2KAbhishek/tmux2k.git
+[submodule "plugins/tmux-menus"]
+	path = plugins/tmux-menus
+	url = https://github.com/jaclu/tmux-menus.git

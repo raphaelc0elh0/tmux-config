@@ -1,0 +1,2 @@
+# cache de runtime do tmux-menus fica fora (ele mesmo já ignora, aqui é por garantia)
+plugins/tmux-menus/cache/
