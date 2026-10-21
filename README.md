@@ -1,66 +1,67 @@
 # tmux-config
 
-Configuração do tmux do Raphael: `tmux.conf`, a barra só-mouse (`tmux.conf.d/mouse.conf`) e os dois
-plugins como submódulos pinados ([tmux2k](https://github.com/2KAbhishek/tmux2k) para a barra,
-[tmux-menus](https://github.com/jaclu/tmux-menus) para o menu ☰). Pensada para terminal web em celular
-(ttyd) e para o Claude Code: Esc imediato, `extended-keys`, abas clicáveis, menus de botão direito em português.
+Raphael's tmux configuration: `tmux.conf`, the mouse-only bar (`tmux.conf.d/mouse.conf`) and the two
+plugins as pinned submodules ([tmux2k](https://github.com/2KAbhishek/tmux2k) for the bar,
+[tmux-menus](https://github.com/jaclu/tmux-menus) for the ☰ menu). Built for a web terminal on a phone
+(ttyd) and for Claude Code: instant Esc, `extended-keys`, clickable tabs, right-click menus.
 
-## Instalar
+## Install
 
 ```bash
 git clone --recurse-submodules https://github.com/raphaelc0elh0/tmux-config.git ~/raphael/tmux-config
-~/raphael/tmux-config/install.sh          # links + plugins
-~/raphael/tmux-config/install.sh --tmux   # idem + tmux 3.7b estático em ~/tools/bin (Linux x86-64)
+~/raphael/tmux-config/install.sh          # symlinks + plugins
+~/raphael/tmux-config/install.sh --tmux   # same, plus the static tmux 3.7b into ~/tools/bin (Linux x86-64)
 ```
 
-O `install.sh` cria links (`~/.tmux.conf`, `~/.tmux.conf.d`, `~/.tmux/plugins/{tmux2k,tmux-menus}`)
-apontando para o clone, guarda o que já existia em `*.bak-<data>` e carrega a config num servidor
-descartável para pegar erro de sintaxe. A pasta do clone pode ser outra; os links seguem o repo.
+`install.sh` creates symlinks (`~/.tmux.conf`, `~/.tmux.conf.d`, `~/.tmux/plugins/{tmux2k,tmux-menus}`)
+pointing at the clone, keeps whatever was there as `*.bak-<date>` and loads the config in a throwaway
+server to catch syntax errors. The clone can live anywhere; the symlinks follow the repo.
 
-## Requisitos
+## Requirements
 
-| O quê | Por quê |
+| What | Why |
 |---|---|
-| tmux **≥ 3.7** | botões de verdade na barra (`range=control\|N`, clique na borda superior). Com 3.4 a config carrega igual, mas cai no `%else` do `mouse.conf`: faixa "Ações" na borda inferior que abre um menu |
-| Nerd Font no terminal | ícones do tmux2k |
-| `bash`, `awk`, `/proc` | plugins `cpu` e `ram` do tmux2k; `btop` opcional (clique em cpu/ram abre) |
+| tmux **≥ 3.7** | real buttons on the bar (`range=control\|N`, clicks on the top border). With 3.4 the config still loads but falls into the `%else` of `mouse.conf`: an "Actions" strip on the bottom border that opens a menu |
+| Nerd Font in the terminal | tmux2k icons |
+| `bash`, `awk`, `/proc` | tmux2k `cpu` and `ram` plugins; `btop` optional (clicking cpu/ram opens it) |
 
-Se o tmux ≥ 3.7 não está no `/usr/bin`, o `tmux.conf` fixa o `PATH` do servidor em `~/tools/bin:~/.local/bin:…`
-(`%if` por versão) para que os `run-shell` dos plugins falem com o servidor certo — detalhe que custou caro no ttyd.
+If tmux ≥ 3.7 is not in `/usr/bin`, `tmux.conf` pins the server's `PATH` to `~/tools/bin:~/.local/bin:…`
+(`%if` by version) so the plugins' `run-shell` calls talk to the right server — a detail that cost dearly under ttyd.
 
 ## Layout (tmux ≥ 3.7)
 
-- **Topo** (1 linha): sessão (clique → lista de sessões) · `☰ Menu` (tmux-menus) · ram · cpu · hora UTC.
-- **Rodapé**: abas na borda inferior do painel. Clique troca, botão do meio fecha, botão direito abre menu,
-  duplo clique no vazio cria janela. Só as janelas 1–9 são clicáveis (limite de 10 controles do tmux).
-- Botão direito no painel: nova janela, dividir, zoom, igualar, colar, fechar.
-- Fundo da barra transparente (`@tmux2k-bg-main default`).
+- **Top** (1 line): session (click → session list) · `☰ Menu` (tmux-menus) · ram · cpu · UTC time.
+- **Bottom**: tabs on the pane's bottom border. Click switches, middle button closes, right button opens a menu,
+  double click on empty space creates a window. Only windows 1–9 are clickable (tmux's limit of 10 controls).
+- Right click on a pane: new window, split, zoom, even out, paste, close.
+- Transparent bar background (`@tmux2k-bg-main default`).
 
-## Teclas
+## Keys
 
-| Tecla | Faz |
+| Key | Does |
 |---|---|
-| `C-b s` / `C-b w` | sessões / sessões+janelas, com preview |
-| `C-b \|` / `C-b -` | dividir na mesma pasta |
-| `C-b =` | colunas iguais |
-| `Alt+setas` | mover entre painéis |
-| `C-b N` | nova sessão pelo nome |
-| `C-b r` | recarregar config |
+| `C-b s` / `C-b w` | sessions / sessions+windows, with preview |
+| `C-b \|` / `C-b -` | split in the same directory |
+| `C-b =` | equal columns |
+| `Alt+arrows` | move between panes |
+| `C-b N` | new session by name |
+| `C-b r` | reload config |
 | `C-b \` | tmux-menus |
 
-## Sessões que sobrevivem ao reboot (opcional)
+## Sessions that survive a reboot (optional)
 
-Onde [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) e
-[tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) estiverem clonados em `~/.tmux/plugins/`,
-o `tmux.conf` os carrega: salva a cada 15 min e restaura ao subir o servidor (`C-b C-s` / `C-b C-r` à mão).
-Painel com `claude` volta pelo `~/.tmux/claude-restore`, que é da máquina, não do repo. Sem os clones, nada carrega.
+Wherever [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) and
+[tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) are cloned under `~/.tmux/plugins/`,
+`tmux.conf` loads them: saves every 15 min and restores when the server starts (`C-b C-s` / `C-b C-r` by hand).
+A pane running `claude` comes back through `~/.tmux/claude-restore`, which belongs to the machine, not the repo.
+Without the clones, nothing loads.
 
-## Atualizar um plugin
+## Updating a plugin
 
 ```bash
-git -C plugins/tmux2k pull origin main   # ou checkout de um commit
-git add plugins/tmux2k && git commit -m "tmux2k: <versão>"
+git -C plugins/tmux2k pull origin main   # or check out a commit
+git add plugins/tmux2k && git commit -m "tmux2k: <version>"
 ```
 
-O `mouse.conf` reaproveita peças internas do tmux2k (`plugins/session.sh`, `lib/popup_handler.sh`) e troca
-`bg=#000000` por `bg=default` nos formatos de aba por `sed`; se o upstream renomear algo, é aqui que quebra.
+`mouse.conf` reuses tmux2k internals (`plugins/session.sh`, `lib/popup_handler.sh`) and swaps
+`bg=#000000` for `bg=default` in the tab formats with `sed`; if upstream renames something, this is where it breaks.
