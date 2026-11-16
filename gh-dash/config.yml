@@ -1,0 +1,27 @@
+# gh-dash in the popup of the ⇅ PRs button on the top bar (tmux.conf.d/mouse.conf)
+prSections:
+  - title: Fido
+    filters: is:open repo:hostel4pets/fido
+  - title: Revisão pedida
+    filters: is:open review-requested:@me
+  - title: Outros repos
+    filters: is:open org:hostel4pets -repo:hostel4pets/fido
+issuesSections:
+  - title: Fido
+    filters: is:open repo:hostel4pets/fido
+# inside a repo gh-dash would add repo:<current> to every section; here each section names its repo
+smartFilteringAtLaunch: false
+defaults:
+  view: prs
+  prsLimit: 30
+  issuesLimit: 30
+  refetchIntervalMinutes: 2
+  preview:
+    open: true    # "p" toggles the preview
+    width: 60
+  layout:
+    prs:
+      repo: { hidden: true }
+      assignees: { hidden: true }
+      base: { hidden: true }
+      lines: { hidden: true }

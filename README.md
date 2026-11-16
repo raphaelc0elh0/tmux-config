@@ -29,6 +29,7 @@ come from the first two rows.
 | **Linux** with `/proc`, `bash`, `awk` | tmux2k `cpu` and `ram` plugins read `/proc` | on macOS/BSD the cpu/ram blocks come out empty or broken |
 | Terminal with a **dark background** (or transparency) | `@tmux2k-bg-main default` uses the terminal colour as the bar background | on a light terminal the bar inverts: light bar, dark tabs |
 | `btop` and/or `htop` *(optional)* | clicking cpu/ram opens a monitor in a popup (`tmux.conf.d/sysmon.sh`: btop when the popup has ≥ 80 columns, htop otherwise, `top` as last resort); `q` closes it | falls back to `top` |
+| `gh` logged in + the `gh dash` extension (`gh extension install dlvhdr/gh-dash`) *(optional)* | the `⇅ PRs` button opens gh-dash in a popup, with `gh-dash/config.yml` (linked to `~/.config/gh-dash/`) | the popup opens and closes at once |
 | `git` with submodule support | tmux2k and tmux-menus are pinned submodules | `install.sh` stops with "submodule … is empty" |
 
 If tmux ≥ 3.7 is not in `/usr/bin`, `tmux.conf` pins the server's `PATH` to `~/tools/bin:~/.local/bin:…`
@@ -50,7 +51,7 @@ printf '\uf017 \ue0b0 \uf2db\n'           # a clock, a powerline arrow and a chi
 
 ## Layout (tmux ≥ 3.7)
 
-- **Top** (1 line): session (click → session list) · `☰ Menu` (tmux-menus) · ram · cpu · UTC time.
+- **Top** (1 line): session (click → session list) · `☰ Menu` (tmux-menus) · `⇅ PRs` (gh-dash popup: open Fido PRs, review requested, other org repos; `q` closes) · ram · cpu · UTC time.
 - **Bottom**: tabs on the pane's bottom border. Click switches, middle button closes, right button opens a menu,
   double click on empty space creates a window. Only windows 1–9 are clickable (tmux's limit of 10 controls).
 - Right click on a pane: new window, split, zoom, even out, paste, close.
