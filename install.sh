@@ -31,6 +31,7 @@ link "$REPO/tmux.conf"            "$HOME/.tmux.conf"
 link "$REPO/tmux.conf.d"          "$HOME/.tmux.conf.d"
 link "$REPO/plugins/tmux2k"       "$HOME/.tmux/plugins/tmux2k"
 link "$REPO/plugins/tmux-menus"   "$HOME/.tmux/plugins/tmux-menus"
+link "$REPO/gh-dash/config.yml"   "$HOME/.config/gh-dash/config.yml"   # ⇅ PRs button
 
 if [ "${1:-}" = "--tmux" ]; then
   echo "== static tmux 3.7b (mjakob-gh/build-static-tmux)"
