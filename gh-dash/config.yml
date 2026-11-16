@@ -1,0 +1,27 @@
+# gh-dash na sidebar do tmux (janela sobreposta do botão ⇅ PRs na barra do topo, ~/.tmux.conf.d/mouse.conf)
+prSections:
+  - title: Fido
+    filters: is:open repo:hostel4pets/fido
+  - title: Revisão pedida
+    filters: is:open review-requested:@me
+  - title: Outros repos
+    filters: is:open org:hostel4pets -repo:hostel4pets/fido
+issuesSections:
+  - title: Fido
+    filters: is:open repo:hostel4pets/fido
+# dentro de um repo o gh-dash acrescenta repo:<atual> a toda aba; aqui as abas já dizem o repo
+smartFilteringAtLaunch: false
+defaults:
+  view: prs
+  prsLimit: 30
+  issuesLimit: 30
+  refetchIntervalMinutes: 2
+  preview:
+    open: true    # "p" esconde/mostra a prévia
+    width: 60
+  layout:
+    prs:
+      repo: { hidden: true }
+      assignees: { hidden: true }
+      base: { hidden: true }
+      lines: { hidden: true }

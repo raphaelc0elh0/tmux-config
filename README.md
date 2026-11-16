@@ -23,6 +23,7 @@ descartável para pegar erro de sintaxe. A pasta do clone pode ser outra; os lin
 |---|---|
 | tmux **≥ 3.7** | botões de verdade na barra (`range=control\|N`, clique na borda superior). Com 3.4 a config carrega igual, mas cai no `%else` do `mouse.conf`: faixa "Ações" na borda inferior que abre um menu |
 | Nerd Font no terminal | ícones do tmux2k |
+| `gh` logado + extensão `gh dash` (`gh extension install dlvhdr/gh-dash`) | botão `⇅ PRs`; config em `gh-dash/config.yml` (link em `~/.config/gh-dash/`) |
 | `bash`, `awk`, `/proc` | plugins `cpu` e `ram` do tmux2k; `btop` opcional (clique em cpu/ram abre) |
 
 Se o tmux ≥ 3.7 não está no `/usr/bin`, o `tmux.conf` fixa o `PATH` do servidor em `~/tools/bin:~/.local/bin:…`
@@ -30,7 +31,8 @@ Se o tmux ≥ 3.7 não está no `/usr/bin`, o `tmux.conf` fixa o `PATH` do servi
 
 ## Layout (tmux ≥ 3.7)
 
-- **Topo** (1 linha): sessão (clique → lista de sessões) · `☰ Menu` (tmux-menus) · ram · cpu · hora UTC.
+- **Topo** (1 linha): sessão (clique → lista de sessões) · `☰ Menu` (tmux-menus) · `⇅ PRs` (gh-dash em janela
+  sobreposta: PRs abertos do Fido, revisão pedida, outros repos da org; `q` fecha) · ram · cpu · hora UTC.
 - **Rodapé**: abas na borda inferior do painel. Clique troca, botão do meio fecha, botão direito abre menu,
   duplo clique no vazio cria janela. Só as janelas 1–9 são clicáveis (limite de 10 controles do tmux).
 - Botão direito no painel: nova janela, dividir, zoom, igualar, colar, fechar.
