@@ -57,6 +57,7 @@ printf '\uf017 \ue0b0 \uf2db\n'           # a clock, a powerline arrow and a chi
 - Right click on a pane: new window, split, zoom, even out, paste, close.
 - Click on ram/cpu: system monitor in a popup, `q` closes it.
 - Transparent bar background (`@tmux2k-bg-main default`).
+- Accent colour (current tab + active pane border): `%hidden ACCENT='#FF69B4'` in `tmux.conf`, one place.
 
 ## Keys
 
